@@ -1,1 +1,1 @@
-# Deploys code to tha Platformatic cloud
+# Deploys code to the Platformatic cloud

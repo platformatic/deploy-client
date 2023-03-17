@@ -1,7 +1,7 @@
 {
   "name": "deploy-client",
   "version": "0.0.1",
-  "description": "",
+  "description": "Deploy code to the Platformatic cloud",
   "main": "index.js",
   "scripts": {
     "lint": "standard .",
