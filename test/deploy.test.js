@@ -150,7 +150,7 @@ test('should successfully deploy platformatic project with PR context', async (t
             appType: 'db',
             configPath: 'platformatic.db.json'
           },
-          githubMetadata
+          ...githubMetadata
         })
         t.ok(request.body.bundle.checksum)
         reply.code(200).send({ id: bundleId, token, isBundleUploaded: false })
@@ -250,7 +250,7 @@ test('should successfully deploy platformatic project with branch context', asyn
             appType: 'db',
             configPath: 'platformatic.db.json'
           },
-          githubMetadata
+          ...githubMetadata
         })
         t.ok(request.body.bundle.checksum)
         reply.code(200).send({ id: bundleId, token, isBundleUploaded: false })
@@ -431,7 +431,7 @@ test('should successfully deploy platformatic project with branch context', asyn
             appType: 'db',
             configPath: 'platformatic.db.json'
           },
-          githubMetadata
+          ...githubMetadata
         })
         t.ok(request.body.bundle.checksum)
         reply.code(200).send({ id: bundleId, token, isBundleUploaded: false })
@@ -531,7 +531,7 @@ test('should not deploy bundle of it already exists', async (t) => {
             appType: 'db',
             configPath: 'platformatic.db.json'
           },
-          githubMetadata
+          ...githubMetadata
         })
         t.ok(request.body.bundle.checksum)
         reply.code(200).send({ id: bundleId, token, isBundleUploaded: true })
