@@ -276,12 +276,10 @@ async function deploy ({
     mergedEnvVars,
     mergedSecrets
   )
-  logger.info('Application has been successfully created')
-  logger.info('Application URL: ' + entryPointUrl)
-
-  logger.info('Making a prewarm application call...')
+  logger.info('Application has been successfully deployed')
+  logger.info('Starting application at ' + entryPointUrl)
   await makePrewarmRequest(entryPointUrl, logger)
-  logger.info('Application has been successfully prewarmed')
+  logger.info('Application has been successfully started')
 
   return entryPointUrl
 }
