@@ -27,14 +27,11 @@ test('should deploy platformatic project without github metadata', async (t) => 
 
   const variables = {
     ENV_VARIABLE_1: 'value1',
-    ENV_VARIABLE_2: 'value2',
-    PLT_ENV_VARIABLE: 'value4',
-    PLT_ENV_VARIABLE1: 'platformatic_variable1',
-    PLT_ENV_VARIABLE2: 'platformatic_variable2'
+    ENV_VARIABLE_2: 'value2'
   }
 
   const secrets = {
-    ENV_VARIABLE_3: 'value3'
+    SECRET_VARIABLE_1: 'value3'
   }
 
   await startDeployService(
@@ -58,7 +55,19 @@ test('should deploy platformatic project without github metadata', async (t) => 
         t.equal(request.headers.authorization, `Bearer ${token}`)
         t.same(
           request.body,
-          { label, variables, secrets }
+          {
+            label,
+            variables: {
+              ...variables,
+              FILE_ENV_VARIABLE1: 'platformatic_variable1',
+              FILE_ENV_VARIABLE2: 'platformatic_variable2'
+            },
+            secrets: {
+              ...secrets,
+              FILE_SECRET_VARIABLE1: 'platformatic_secret1',
+              FILE_SECRET_VARIABLE2: 'platformatic_secret2'
+            }
+          }
         )
         reply.code(200).send({ entryPointUrl })
       },
@@ -108,14 +117,11 @@ test('should successfully deploy platformatic project with PR context', async (t
 
   const variables = {
     ENV_VARIABLE_1: 'value1',
-    ENV_VARIABLE_2: 'value2',
-    PLT_ENV_VARIABLE: 'value4',
-    PLT_ENV_VARIABLE1: 'platformatic_variable1',
-    PLT_ENV_VARIABLE2: 'platformatic_variable2'
+    ENV_VARIABLE_2: 'value2'
   }
 
   const secrets = {
-    ENV_VARIABLE_3: 'value3'
+    SECRET_VARIABLE_1: 'value3'
   }
 
   const githubMetadata = {
@@ -161,7 +167,19 @@ test('should successfully deploy platformatic project with PR context', async (t
         t.equal(request.headers.authorization, `Bearer ${token}`)
         t.same(
           request.body,
-          { label, variables, secrets }
+          {
+            label,
+            variables: {
+              ...variables,
+              FILE_ENV_VARIABLE1: 'platformatic_variable1',
+              FILE_ENV_VARIABLE2: 'platformatic_variable2'
+            },
+            secrets: {
+              ...secrets,
+              FILE_SECRET_VARIABLE1: 'platformatic_secret1',
+              FILE_SECRET_VARIABLE2: 'platformatic_secret2'
+            }
+          }
         )
         reply.code(200).send({ entryPointUrl })
       },
@@ -212,14 +230,11 @@ test('should successfully deploy platformatic project with branch context', asyn
 
   const variables = {
     ENV_VARIABLE_1: 'value1',
-    ENV_VARIABLE_2: 'value2',
-    PLT_ENV_VARIABLE: 'value4',
-    PLT_ENV_VARIABLE1: 'platformatic_variable1',
-    PLT_ENV_VARIABLE2: 'platformatic_variable2'
+    ENV_VARIABLE_2: 'value2'
   }
 
   const secrets = {
-    ENV_VARIABLE_3: 'value3'
+    SECRET_VARIABLE_1: 'value3'
   }
 
   const githubMetadata = {
@@ -261,7 +276,19 @@ test('should successfully deploy platformatic project with branch context', asyn
         t.equal(request.headers.authorization, `Bearer ${token}`)
         t.same(
           request.body,
-          { label, variables, secrets }
+          {
+            label,
+            variables: {
+              ...variables,
+              FILE_ENV_VARIABLE1: 'platformatic_variable1',
+              FILE_ENV_VARIABLE2: 'platformatic_variable2'
+            },
+            secrets: {
+              ...secrets,
+              FILE_SECRET_VARIABLE1: 'platformatic_secret1',
+              FILE_SECRET_VARIABLE2: 'platformatic_secret2'
+            }
+          }
         )
         reply.code(200).send({ entryPointUrl })
       },
@@ -312,14 +339,11 @@ test('should successfully deploy platformatic project without github metadata', 
 
   const variables = {
     ENV_VARIABLE_1: 'value1',
-    ENV_VARIABLE_2: 'value2',
-    PLT_ENV_VARIABLE: 'value4',
-    PLT_ENV_VARIABLE1: 'platformatic_variable1',
-    PLT_ENV_VARIABLE2: 'platformatic_variable2'
+    ENV_VARIABLE_2: 'value2'
   }
 
   const secrets = {
-    ENV_VARIABLE_3: 'value3'
+    SECRET_VARIABLE_1: 'value3'
   }
 
   await startDeployService(
@@ -343,7 +367,19 @@ test('should successfully deploy platformatic project without github metadata', 
         t.equal(request.headers.authorization, `Bearer ${token}`)
         t.same(
           request.body,
-          { label, variables, secrets }
+          {
+            label,
+            variables: {
+              ...variables,
+              FILE_ENV_VARIABLE1: 'platformatic_variable1',
+              FILE_ENV_VARIABLE2: 'platformatic_variable2'
+            },
+            secrets: {
+              ...secrets,
+              FILE_SECRET_VARIABLE1: 'platformatic_secret1',
+              FILE_SECRET_VARIABLE2: 'platformatic_secret2'
+            }
+          }
         )
         reply.code(200).send({ entryPointUrl })
       },
@@ -393,14 +429,11 @@ test('should successfully deploy platformatic project with branch context', asyn
 
   const variables = {
     ENV_VARIABLE_1: 'value1',
-    ENV_VARIABLE_2: 'value2',
-    PLT_ENV_VARIABLE: 'value4',
-    PLT_ENV_VARIABLE1: 'platformatic_variable1',
-    PLT_ENV_VARIABLE2: 'platformatic_variable2'
+    ENV_VARIABLE_2: 'value2'
   }
 
   const secrets = {
-    ENV_VARIABLE_3: 'value3'
+    SECRET_VARIABLE_1: 'value3'
   }
 
   const githubMetadata = {
@@ -442,7 +475,19 @@ test('should successfully deploy platformatic project with branch context', asyn
         t.equal(request.headers.authorization, `Bearer ${token}`)
         t.same(
           request.body,
-          { label, variables, secrets }
+          {
+            label,
+            variables: {
+              ...variables,
+              FILE_ENV_VARIABLE1: 'platformatic_variable1',
+              FILE_ENV_VARIABLE2: 'platformatic_variable2'
+            },
+            secrets: {
+              ...secrets,
+              FILE_SECRET_VARIABLE1: 'platformatic_secret1',
+              FILE_SECRET_VARIABLE2: 'platformatic_secret2'
+            }
+          }
         )
         reply.code(200).send({ entryPointUrl })
       },
@@ -493,14 +538,11 @@ test('should not deploy bundle of it already exists', async (t) => {
 
   const variables = {
     ENV_VARIABLE_1: 'value1',
-    ENV_VARIABLE_2: 'value2',
-    PLT_ENV_VARIABLE: 'value4',
-    PLT_ENV_VARIABLE1: 'platformatic_variable1',
-    PLT_ENV_VARIABLE2: 'platformatic_variable2'
+    ENV_VARIABLE_2: 'value2'
   }
 
   const secrets = {
-    ENV_VARIABLE_3: 'value3'
+    SECRET_VARIABLE_1: 'value3'
   }
 
   const githubMetadata = {
@@ -542,7 +584,19 @@ test('should not deploy bundle of it already exists', async (t) => {
         t.equal(request.headers.authorization, `Bearer ${token}`)
         t.same(
           request.body,
-          { label, variables, secrets }
+          {
+            label,
+            variables: {
+              ...variables,
+              FILE_ENV_VARIABLE1: 'platformatic_variable1',
+              FILE_ENV_VARIABLE2: 'platformatic_variable2'
+            },
+            secrets: {
+              ...secrets,
+              FILE_SECRET_VARIABLE1: 'platformatic_secret1',
+              FILE_SECRET_VARIABLE2: 'platformatic_secret2'
+            }
+          }
         )
         reply.code(200).send({ entryPointUrl })
       },
@@ -593,14 +647,11 @@ test('should successfully deploy platformatic project without github metadata', 
 
   const variables = {
     ENV_VARIABLE_1: 'value1',
-    ENV_VARIABLE_2: 'value2',
-    PLT_ENV_VARIABLE: 'value4',
-    PLT_ENV_VARIABLE1: 'platformatic_variable1',
-    PLT_ENV_VARIABLE2: 'platformatic_variable2'
+    ENV_VARIABLE_2: 'value2'
   }
 
   const secrets = {
-    ENV_VARIABLE_3: 'value3'
+    SECRET_VARIABLE_1: 'value3'
   }
 
   await startDeployService(
@@ -624,7 +675,19 @@ test('should successfully deploy platformatic project without github metadata', 
         t.equal(request.headers.authorization, `Bearer ${token}`)
         t.same(
           request.body,
-          { label, variables, secrets }
+          {
+            label,
+            variables: {
+              ...variables,
+              FILE_ENV_VARIABLE1: 'platformatic_variable1',
+              FILE_ENV_VARIABLE2: 'platformatic_variable2'
+            },
+            secrets: {
+              ...secrets,
+              FILE_SECRET_VARIABLE1: 'platformatic_secret1',
+              FILE_SECRET_VARIABLE2: 'platformatic_secret2'
+            }
+          }
         )
         reply.code(200).send({ entryPointUrl })
       },
@@ -674,14 +737,11 @@ test('should show a warning if platformatic dep is not in the dev section', asyn
 
   const variables = {
     ENV_VARIABLE_1: 'value1',
-    ENV_VARIABLE_2: 'value2',
-    PLT_ENV_VARIABLE: 'value4',
-    PLT_ENV_VARIABLE1: 'platformatic_variable1',
-    PLT_ENV_VARIABLE2: 'platformatic_variable2'
+    ENV_VARIABLE_2: 'value2'
   }
 
   const secrets = {
-    ENV_VARIABLE_3: 'value3'
+    SECRET_VARIABLE_1: 'value3'
   }
 
   await startDeployService(

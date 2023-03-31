@@ -197,6 +197,7 @@ async function deploy ({
   pathToProject,
   pathToConfig,
   pathToEnvFile,
+  pathToSecretsFile,
   secrets,
   variables,
   githubMetadata,
@@ -265,11 +266,15 @@ async function deploy ({
   const envFileVars = await getEnvFileVariables(envFilePath)
   const mergedEnvVars = { ...envFileVars, ...variables }
 
+  const secretsFilePath = join(pathToProject, pathToSecretsFile || '.secrets.env')
+  const secretsFromFile = await getEnvFileVariables(secretsFilePath)
+  const mergedSecrets = { ...secretsFromFile, ...secrets }
+
   const { entryPointUrl } = await deployClient.createDeployment(
     token,
     label,
     mergedEnvVars,
-    secrets
+    mergedSecrets
   )
   logger.info('Application has been successfully created')
   logger.info('Application URL: ' + entryPointUrl)
