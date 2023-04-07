@@ -1,6 +1,6 @@
 'use strict'
 
-const { tmpdir } = require('os')
+const { tmpdir, EOL } = require('os')
 const { join, basename } = require('path')
 const { createHash } = require('crypto')
 const { existsSync } = require('fs')
@@ -118,10 +118,12 @@ function generateMD5Hash (buffer) {
 
 function parseEnvVariables (envVars) {
   const parsedEnvVars = {}
-  for (const line of envVars.split('\n')) {
-    if (line === '') continue
-    const [key, value] = line.split('=')
-    parsedEnvVars[key] = value
+  for (let line of envVars.split(EOL)) {
+    line = line.trim()
+    if (line !== '' && !line.startsWith('#') && line.includes('=')) {
+      const [key, value] = line.split('=')
+      parsedEnvVars[key] = value
+    }
   }
   return parsedEnvVars
 }
