@@ -76,7 +76,7 @@ class DeployClient {
         authorization: `Bearer ${token}`
       },
       body: fileData,
-      headersTimeout: 60 * 1000
+      headersTimeout: 5 * 60 * 1000
     })
 
     if (statusCode !== 200) {
