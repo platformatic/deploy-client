@@ -1,18 +1,18 @@
 'use strict'
 
 const { tmpdir, EOL } = require('os')
-const { join, basename } = require('path')
+const { join } = require('path')
 const { createHash } = require('crypto')
 const { existsSync } = require('fs')
-const { readFile, access, readdir, mkdtemp, rm } = require('fs/promises')
+const { readFile, access, mkdtemp, rm } = require('fs/promises')
 
 const tar = require('tar')
 const { request } = require('undici')
 
-const makePrewarmRequest = require('./lib/prewarm.js')
+const ConfigManager = require('@platformatic/config')
+const { loadConfig, getConfigType } = require('@platformatic/start')
 
-const APPLICATION_TYPES = ['service', 'db']
-const CONFIG_FILE_EXTENSIONS = ['yml', 'yaml', 'json', 'json5', 'tml', 'toml']
+const makePrewarmRequest = require('./lib/prewarm.js')
 
 async function archiveProject (pathToProject, archivePath) {
   const options = { gzip: false, file: archivePath, cwd: pathToProject }
@@ -128,41 +128,11 @@ function parseEnvVariables (envVars) {
   return parsedEnvVars
 }
 
-async function findConfigFile (projectDir) {
-  const files = await readdir(projectDir)
-
-  for (const file of files) {
-    const filename = basename(file)
-    const filenameParts = filename.split('.')
-
-    if (filenameParts.length === 3) {
-      const [name, ext1, ext2] = filenameParts
-      if (
-        name === 'platformatic' &&
-        APPLICATION_TYPES.includes(ext1) &&
-        CONFIG_FILE_EXTENSIONS.includes(ext2)
-      ) {
-        return filename
-      }
-    }
-  }
-
-  return null
-}
-
 async function getEnvFileVariables (envFilePath) {
   if (!existsSync(envFilePath)) return {}
 
   const dotEnvFile = await readFile(envFilePath, 'utf8')
   return parseEnvVariables(dotEnvFile)
-}
-
-function getApplicationType (configPath) {
-  const appType = configPath.split('.').slice(-2)[0]
-  if (!APPLICATION_TYPES.includes(appType)) {
-    throw new Error(`Invalid application type: ${appType}, must be one of: ${APPLICATION_TYPES.join(', ')}`)
-  }
-  return appType
 }
 
 async function isFileInProject (path) {
@@ -215,17 +185,18 @@ async function deploy ({
 
   await checkPlatformaticDependency(logger, pathToProject)
 
-  if (pathToConfig) {
-    const configFileExist = await isFileInProject(join(pathToProject, pathToConfig))
-    if (!configFileExist) {
-      throw new Error('There is no Platformatic config file')
-    }
-  } else {
-    pathToConfig = await findConfigFile(pathToProject)
-    if (pathToConfig === null) {
-      throw new Error('Could not find Platformatic config file, please specify it in the action input')
+  if (!pathToConfig) {
+    pathToConfig = await ConfigManager.findConfigFile(pathToProject)
+    if (!pathToConfig) {
+      throw new Error('Could not find Platformatic config file')
     }
   }
+
+  const args = ['-c', join(pathToProject, pathToConfig)]
+  const appType = await getConfigType(args, pathToProject)
+  const { configManager } = await loadConfig({}, args, undefined, appType)
+
+  pathToConfig = configManager.fullPath
 
   logger.info(`Found Platformatic config file: ${pathToConfig}`)
 
@@ -234,8 +205,6 @@ async function deploy ({
     workspaceId,
     workspaceKey
   )
-
-  const appType = getApplicationType(pathToConfig)
 
   const tmpDir = await mkdtemp(join(tmpdir(), 'plt-deploy-'))
   const bundlePath = join(tmpDir, 'project.tar')

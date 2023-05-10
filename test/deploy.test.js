@@ -1007,7 +1007,7 @@ test('should fail if there is no config file', async (t) => {
       }
     })
   } catch (err) {
-    t.equal(err.message, 'There is no Platformatic config file')
+    t.match(err.message, /Missing config file!/)
   }
 })
 
@@ -1024,7 +1024,7 @@ test('should fail if there is no config file', async (t) => {
       }
     })
   } catch (err) {
-    t.equal(err.message, 'Could not find Platformatic config file, please specify it in the action input')
+    t.equal(err.message, 'Could not find Platformatic config file')
   }
 })
 
@@ -1042,6 +1042,6 @@ test('should fail if there is no config file', async (t) => {
       }
     })
   } catch (err) {
-    t.equal(err.message, 'Invalid application type: wrong, must be one of: service, db')
+    t.match(err.message, /Missing config file!/)
   }
 })
