@@ -19,7 +19,7 @@ test('should deploy platformatic project without github metadata', async (t) => 
     t.pass('Action should make a prewarm request to the machine')
   })
 
-  const pathToProject = join(__dirname, 'fixtures', 'basic')
+  const pathToProject = join(__dirname, 'fixtures', 'db-basic')
   const pathToConfig = './platformatic.db.json'
   const pathToEnvFile = './.env'
 
@@ -109,7 +109,7 @@ test('should successfully deploy platformatic project with PR context', async (t
     t.pass('Action should make a prewarm request to the machine')
   })
 
-  const pathToProject = join(__dirname, 'fixtures', 'basic')
+  const pathToProject = join(__dirname, 'fixtures', 'db-basic')
   const pathToConfig = './platformatic.db.json'
   const pathToEnvFile = './.env'
 
@@ -222,7 +222,7 @@ test('should successfully deploy platformatic project with branch context', asyn
     t.pass('Action should make a prewarm request to the machine')
   })
 
-  const pathToProject = join(__dirname, 'fixtures', 'basic')
+  const pathToProject = join(__dirname, 'fixtures', 'db-basic')
   const pathToConfig = './platformatic.db.json'
   const pathToEnvFile = './.env'
 
@@ -331,7 +331,7 @@ test('should successfully deploy platformatic project without github metadata', 
     t.pass('Action should make a prewarm request to the machine')
   })
 
-  const pathToProject = join(__dirname, 'fixtures', 'basic')
+  const pathToProject = join(__dirname, 'fixtures', 'db-basic')
   const pathToConfig = './platformatic.db.json'
   const pathToEnvFile = './.env'
 
@@ -421,7 +421,7 @@ test('should successfully deploy platformatic project with branch context', asyn
     t.pass('Action should make a prewarm request to the machine')
   })
 
-  const pathToProject = join(__dirname, 'fixtures', 'basic')
+  const pathToProject = join(__dirname, 'fixtures', 'db-basic')
   const pathToConfig = './platformatic.db.json'
   const pathToEnvFile = './.env'
 
@@ -530,7 +530,7 @@ test('should not deploy bundle of it already exists', async (t) => {
     t.pass('Action should make a prewarm request to the machine')
   })
 
-  const pathToProject = join(__dirname, 'fixtures', 'basic')
+  const pathToProject = join(__dirname, 'fixtures', 'db-basic')
   const pathToConfig = './platformatic.db.json'
   const pathToEnvFile = './.env'
 
@@ -639,7 +639,7 @@ test('should successfully deploy platformatic project without github metadata', 
     t.pass('Action should make a prewarm request to the machine')
   })
 
-  const pathToProject = join(__dirname, 'fixtures', 'basic')
+  const pathToProject = join(__dirname, 'fixtures', 'db-basic')
   const pathToConfig = './platformatic.db.json'
   const pathToEnvFile = './.env'
 
@@ -841,7 +841,7 @@ test('should fail if platformatic_api_key is wrong', async (t) => {
       deployServiceHost: 'http://localhost:3042',
       workspaceId: 'test-workspace-id',
       workspaceKey: 'test-workspace-key',
-      pathToProject: join(__dirname, 'fixtures', 'basic'),
+      pathToProject: join(__dirname, 'fixtures', 'db-basic'),
       logger: {
         info: () => {},
         warn: () => t.fail('Should not log a warning')
@@ -867,7 +867,7 @@ test('should fail if it could not create a bundle', async (t) => {
       deployServiceHost: 'http://localhost:3042',
       workspaceId: 'test-workspace-id',
       workspaceKey: 'test-workspace-key',
-      pathToProject: join(__dirname, 'fixtures', 'basic'),
+      pathToProject: join(__dirname, 'fixtures', 'db-basic'),
       logger: {
         info: () => {},
         warn: () => t.fail('Should not log a warning')
@@ -896,7 +896,7 @@ test('should fail if platformatic_api_key is wrong', async (t) => {
       deployServiceHost: 'http://localhost:3042',
       workspaceId: 'test-workspace-id',
       workspaceKey: 'test-workspace-key',
-      pathToProject: join(__dirname, 'fixtures', 'basic'),
+      pathToProject: join(__dirname, 'fixtures', 'db-basic'),
       logger: {
         info: () => {},
         warn: () => t.fail('Should not log a warning')
@@ -922,7 +922,7 @@ test('should fail if it could not create a deployment', async (t) => {
       deployServiceHost: 'http://localhost:3042',
       workspaceId: 'test-workspace-id',
       workspaceKey: 'test-workspace-key',
-      pathToProject: join(__dirname, 'fixtures', 'basic'),
+      pathToProject: join(__dirname, 'fixtures', 'db-basic'),
       logger: {
         info: () => {},
         warn: () => t.fail('Should not log a warning')
@@ -945,7 +945,7 @@ test('should fail if it could not upload code tarball', async (t) => {
       deployServiceHost: 'http://localhost:3042',
       workspaceId: 'test-workspace-id',
       workspaceKey: 'test-workspace-key',
-      pathToProject: join(__dirname, 'fixtures', 'basic'),
+      pathToProject: join(__dirname, 'fixtures', 'db-basic'),
       logger: {
         info: () => {},
         warn: () => t.fail('Should not log a warning')
@@ -980,7 +980,7 @@ test('should fail if it could not make a prewarm call', async (t) => {
       deployServiceHost: 'http://localhost:3042',
       workspaceId: 'test-workspace-id',
       workspaceKey: 'test-workspace-key',
-      pathToProject: join(__dirname, 'fixtures', 'basic'),
+      pathToProject: join(__dirname, 'fixtures', 'db-basic'),
       logger: {
         info: () => {},
         warn: (message) => {
@@ -999,7 +999,7 @@ test('should fail if there is no config file', async (t) => {
       deployServiceHost: 'http://localhost:3042',
       workspaceId: 'test-workspace-id',
       workspaceKey: 'test-workspace-key',
-      pathToProject: join(__dirname, 'fixtures', 'basic'),
+      pathToProject: join(__dirname, 'fixtures', 'db-basic'),
       pathToConfig: './platformatic1.db.json',
       logger: {
         info: () => {},
